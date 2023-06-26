@@ -2,8 +2,8 @@ import styles from './page.module.css'
 export default function Home() {
   return (
     <main className={styles.main}>
-      <div className={styles.boxClimate}>
-        <div className="container d-flex justify-content-between" style={{ border: "1px solid white" }}>
+      <section className={styles.boxClimate}>
+        <div className="container p-3 d-flex justify-content-between" style={{ border: "1px solid white" }}>
           <button type="button" className="btn btn-secondary">Search for places</button>
           <button type="button" className="btn btn-secondary">
             <i className="bi bi-geo-alt-fill"></i>
@@ -24,7 +24,11 @@ export default function Home() {
             // overflow: "hidden",
           }} />
         </div>
-      </div>
+        <h1>15</h1><span>°C</span>
+        <h5>Shower</h5>
+        <h6>Today - Fri, 5 Jun</h6>
+        <i className="bi bi-geo-alt-fill"></i><h6>(lugar)</h6>
+      </section>
       <div className={styles.boxToday}>
         today
       </div>
