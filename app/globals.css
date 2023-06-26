@@ -12,6 +12,8 @@ body {
   overflow-y: hidden;
   width: 100%;
   min-height: 100vh;
+  display: flex;
+  justify-content: center;
   /* border: 2px dashed darkblue; */
 }
 

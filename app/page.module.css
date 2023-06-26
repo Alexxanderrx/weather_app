@@ -2,19 +2,14 @@
 
 .main {
   display: flex;
-  /* height: 100%; */
-  /* flex-direction: column; */
-  /* justify-content: space-between; */
-  /* align-items: center; */
-  /* padding: 6rem; */
-  width: 100%;
+  width: 80%;
   height: 100vh;
-  background-color: white;
+  background-color: rgb(151, 136, 136);
 }
 
 .boxClimate {
   height: 100%;
-  width: 33.3%;
+  width: 30%;
   background-color: rgb(30, 33, 58);
   /* height: 100%; */
   /* padding: 2%; */
@@ -23,7 +18,7 @@
 
 .boxToday {
   height: 100%;
-  width: 66.6%;
+  width: 70%;
   background-color: rgb(16, 14, 29);
   color: white;
   /* height: 100%; */

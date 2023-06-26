@@ -12,13 +12,16 @@ export default function Home() {
         </div>
         <div className="container d-flex justify-content-center align-items-center" style={{
           border: "1px solid blue",
+          overflow: "hidden",
         }}>
           <img src="./weatherResources/Shower.png" className='img-fluid' alt='Shower.png' style={{
             position: "absolute",
-
+            width: "150px"
           }} />
-          <img src="./weatherResources/Cloud-background.png" className='img-fluid' alt='Cloud-background.png' style={{
-            opacity: "0.1"
+          <img src="./weatherResources/Cloud-background.png" alt='Cloud-background.png' style={{
+            width: "530px",
+            opacity: "0.1",
+            // overflow: "hidden",
           }} />
         </div>
       </div>
