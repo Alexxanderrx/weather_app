@@ -7,6 +7,24 @@
   background-color: rgb(151, 136, 136);
 }
 
+.boxNav {
+  position: absolute;
+  z-index: 2;
+  height: 100%;
+  width: 24%;
+  background-color: rgb(30, 33, 58);
+  /* height: 100%; */
+  /* padding: 2%; */
+  color: white;
+  transition: 1000ms;
+}
+
+.compress {
+  transition: 1000ms;
+  transform: scale(1, 0.2);
+  transform: translateY(-100%);
+}
+
 .boxClimate {
   height: 100%;
   width: 30%;
@@ -21,6 +39,9 @@
   width: 70%;
   background-color: rgb(16, 14, 29);
   color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   /* height: 100%; */
 
 }
