@@ -46,18 +46,75 @@
 
 }
 
+.imgWeaterBC {
+  position: absolute;
+  width: 150px;
+}
+
+.bgCloudBC {
+  width: 530px;
+  opacity: 0.1;
+}
 
 /* Mobile */
-/* @media (max-width: 700px) {
-  .content {
-
+@media (max-width: 700px) {
+  .main {
+    background-color: aqua;
+    flex-direction: column;
+    width: 100%;
+    height: 400vh;
   }
 
-} */
+  .boxNav {
+    height: 100vh;
+    width: 100%;
+  }
+
+  .boxClimate {
+    height: 100vh;
+    width: 100%;
+    color: white;
+  }
+
+  .boxToday {
+    height: 300vh;
+    width: 100%;
+  }
+
+
+}
 
 /* Tablet and Smaller Desktop */
-/* @media (min-width: 701px) and (max-width: 1120px) {
-  .grid {
-    grid-template-columns: repeat(2, 50%);
+@media (min-width: 701px) and (max-width: 1120px) {
+  .main {
+    width: 100%;
   }
-} */
+
+  .boxClimate {
+    height: 100%;
+  }
+
+  .boxNav {
+    width: 30%;
+  }
+
+  .imgWeaterBC {
+    width: 130px;
+  }
+
+  .bgCloudBC {
+    width: 400px;
+  }
+
+}
+
+/* 4k Desktop */
+@media (min-width: 2160px) {
+  .main {
+    width: 100%;
+  }
+
+  .boxNav {
+    width: 30%;
+  }
+}
