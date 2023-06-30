@@ -14,28 +14,34 @@ export default function Home() {
   // const dataWeather = getData(`https://api.openweathermap.org/data/2.5/weather?lat${dataRecup[0].lat}=&lon=${dataRecup[0].lon}&appid=b7b1b4492885348f44fdc6c0af7556ca`);
   console.log(dataRecup);
   console.log(dataWeather);
-  let cityLat = dataRecup && dataRecup[0].lat;
-  let cityLon = dataRecup && dataRecup[0].lon;
-  console.log(cityLat);
-  console.log(cityLon);
-
-  let urlW = `https://api.openweathermap.org/data/2.5/weather?lat=${cityLat}&lon=${cityLon}&appid=b7b1b4492885348f44fdc6c0af7556ca`
-  console.log(urlW);
+  // let cityLat = dataRecup && dataRecup[0].lat;
+  // let cityLon = dataRecup && dataRecup[0].lon;
+  // console.log(cityLat);
+  // console.log(cityLon);
+  let ciudad = "";
+  // let urlW = `https://api.openweathermap.org/data/2.5/weather?lat=${cityLat}&lon=${cityLon}&appid=b7b1b4492885348f44fdc6c0af7556ca`
+  // console.log(urlW);
   useEffect(() => {
     async function getData() {
-      const response = await fetch("http://api.openweathermap.org/geo/1.0/direct?q=lima&limit=5&appid=b7b1b4492885348f44fdc6c0af7556ca");
+      const response = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${ciudad == "" ? "lima" : ciudad}&limit=5&appid=b7b1b4492885348f44fdc6c0af7556ca`);
       const data = await response.json();
       setDataRecup(data);
-    }
-    getData();
-    // console.log(cityLat);
-    // console.log(cityLon);
-    async function getWeather() {
-      const responseW = await fetch(urlW);
+      // console.log("hola");
+      // console.log(data);
+      const responseW = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${data[0].lat}&lon=${data[0].lon}&appid=b7b1b4492885348f44fdc6c0af7556ca`);
       const dataW = await responseW.json();
       setDataWeather(dataW);
     }
-    getWeather();
+    getData();
+
+    // getWeather();
+    // async function getWeather() {
+    //   const responseW = await fetch(urlW);
+    //   const dataW = await responseW.json();
+    //   setDataWeather(dataW);
+    // }
+    // getWeather();
+
   }, []);
   // console.log(dataWeather);
 
