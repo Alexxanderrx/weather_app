@@ -4,23 +4,10 @@ import styles from './page.module.css'
 
 // async
 export default function Home() {
-  // const dataRecup = await getData("http://api.openweathermap.org/geo/1.0/direct?q=lima&limit=5&appid=b7b1b4492885348f44fdc6c0af7556ca");
   const [dataRecup, setDataRecup] = useState(null);
   const [dataWeather, setDataWeather] = useState(null);
 
-  // ${dataRecup[0].lat}
-  // ${dataRecup[0].lon}
-
-  // const dataWeather = getData(`https://api.openweathermap.org/data/2.5/weather?lat${dataRecup[0].lat}=&lon=${dataRecup[0].lon}&appid=b7b1b4492885348f44fdc6c0af7556ca`);
-  console.log(dataRecup);
-  console.log(dataWeather);
-  // let cityLat = dataRecup && dataRecup[0].lat;
-  // let cityLon = dataRecup && dataRecup[0].lon;
-  // console.log(cityLat);
-  // console.log(cityLon);
   let ciudad = "";
-  // let urlW = `https://api.openweathermap.org/data/2.5/weather?lat=${cityLat}&lon=${cityLon}&appid=b7b1b4492885348f44fdc6c0af7556ca`
-  // console.log(urlW);
   useEffect(() => {
     async function getData() {
       const response = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${ciudad == "" ? "lima" : ciudad}&limit=5&appid=b7b1b4492885348f44fdc6c0af7556ca`);
@@ -33,26 +20,31 @@ export default function Home() {
       setDataWeather(dataW);
     }
     getData();
-
-    // getWeather();
-    // async function getWeather() {
-    //   const responseW = await fetch(urlW);
-    //   const dataW = await responseW.json();
-    //   setDataWeather(dataW);
-    // }
-    // getWeather();
-
   }, []);
-  // console.log(dataWeather);
-
-
+  console.log(dataRecup);
+  console.log(dataWeather);
+  console.log((dataWeather && dataWeather.main.temp) - 273.15);
+  // console.log(typeof (dataWeather && dataWeather.main.temp));
 
 
   const [open, setOpen] = useState(true);
   const OpenUp = () => {
     setOpen(!open);
   }
+
+  const [kelvin, setKelvin] = useState(false);
+  const ConverToC = () => {
+    setKelvin(false);
+  }
+  const ConverToF = () => {
+    setKelvin(true);
+  }
   const CLASSNEW = open ? styles.compress : "";
+  const VALUEM = kelvin ? 1.8 : 1;
+  const VALUES = kelvin ? 32 : 0;
+  let simbol = kelvin ? "F" : "C"
+  // console.log(NEWVALUE);
+
   return (
     <main className={styles.main}>
       {/* , styles.compress */}
@@ -80,6 +72,8 @@ export default function Home() {
 
         </div>
       </nav>
+      {/* -------------------------------------------------------boxClimate----------------------------------------------------------- */}
+
       <section className={styles.boxClimate}>
         {/* style={{ border: "1px solid white" }} */}
         <div className="container p-4 d-flex justify-content-between" >
@@ -91,34 +85,35 @@ export default function Home() {
         </div>
         <div className="container d-flex justify-content-center align-items-center" style={{
           border: "1px solid blue",
-          overflow: "hidden",
+          height: "35vh",
+          // overflow: "hidden",
         }}>
-          <img src="./weatherResources/Shower.png" className={styles.imgWeaterBC} alt='Shower.png' />
+          <img src={`./weatherResources/${(dataWeather && dataWeather.weather[0].main)}.png`} className={styles.imgWeaterBC} alt='Weather.png' />
           <img src="./weatherResources/Cloud-background.png" className={styles.bgCloudBC} alt='Cloud-background.png' />
         </div>
-        <div className='container d-flex flex-column justify-content-center align-items-center' style={{
+        <div className='container d-flex flex-column justify-content-around align-items-center' style={{
           border: "1px solid blue",
-          height: "40%"
+          height: "51%"
         }}>
-          <h1>15<span>°C</span></h1>
-          <h5>Shower</h5>
+          <div className={styles.grados}>
+            <h1>{(((dataWeather && dataWeather.main.temp) - 273.15) * (VALUEM) + (VALUES)).toFixed(0)}</h1><span> °{simbol}</span>
+            {console.log(dataWeather && dataWeather.main.temp)}
+          </div>
+          <h5>{(dataWeather && dataWeather.weather[0].main)}</h5>
           <h6>Today - Fri, 5 Jun</h6>
-          <h6><i className="bi bi-geo-alt-fill"></i>(lugar)</h6>
+          <h6><i className="bi bi-geo-alt-fill"></i> {(dataWeather && dataWeather.name)}</h6>
         </div>
       </section>
+      {/* -------------------------------------------------------boxToday----------------------------------------------------------- */}
       <div className={styles.boxToday}>
-        {/* <p>Country:{dataRecup[0].country}</p>
-        <p>State:{dataRecup[0].state}</p>
-        <p>lat:{dataRecup[0].lat}</p>
-        <p>lon:{dataRecup[0].lon}</p> */}
         <div className='container d-flex justify-content-end align-items-end' style={{
           border: "1px solid green",
           width: "80%",
           padding: "0",
           gap: "15px"
         }}>
-          <button type="button" className="btn btn-secondary rounded-circle">°C</button>
-          <button type="button" className="btn btn-secondary rounded-circle">°F</button>
+          <button type="button" className="btn btn-secondary rounded-circle" onClick={ConverToC}>°C</button>
+          <button type="button" className="btn btn-secondary rounded-circle" onClick={ConverToF}>°F</button>
         </div>
         <div className='container p-0 d-flex justify-content-between align-items-center ' style={{
           border: "1px solid green",
@@ -190,48 +185,76 @@ export default function Home() {
           border: "1px solid green",
           width: "80%",
         }}>
-          <div className='container d-flex flex-column justify-content-center align-items-center' style={{
+          <div className='container d-flex flex-column justify-content-center align-items-start' style={{
             border: "1px solid red",
             width: "100%",
           }}>
-            <p>Today</p>
+            <p className='fw-semibold' style={{ fontSize: "18px" }}>Today's Hightlights</p>
           </div>
-          <div className='container p-0 d-flex flex-wrap ' style={{
-            border: "1px solid purple",
-            width: "100%",
-            gap: "20%",
-          }}>
-            <div className='container d-flex flex-column justify-content-center align-items-center' style={{
+          <div className={styles.todayHigh}>
+            {/* ---------------------------------------------Wind status--------------------------------------------------------- */}
+            <div className=' d-flex flex-column justify-content-center align-items-center' style={{
               border: "1px solid yellow",
-              width: "40%",
+              padding: "10px",
+              fontFamily: "'Raleway', sans-serif",
+              backgroundColor: "rgb(30, 33, 58)"
             }}>
-              <p>Wind status</p>
-              <p>7mph</p>
-              <p><img></img>WSW</p>
+              <div style={{ fontSize: "12px" }}>Wind status</div>
+              <div className='container d-flex justify-content-center align-items-center gap-2'>
+                <div className={styles.num}>{dataWeather && dataWeather.wind.speed}</div><div>mph</div>
+              </div>
+              <div className='container d-flex justify-content-center align-items-center gap-2 '>
+                <div style={{ transform: `rotate(${dataWeather && dataWeather.wind.deg}deg)`, height: "25px", width: "25px" }} className="badge rounded-circle text-bg-secondary d-flex justify-content-center align-items-center" ><i className="bi bi-forward-fill"></i></div>
+                <div style={{ fontSize: "13px" }}>WSW</div>
+              </div>
+
             </div>
-            <div className='container d-flex flex-column justify-content-center align-items-center' style={{
+            {/* ----------------------------------------------Humidity------------------------------------------------------------- */}
+            <div className=' d-flex flex-column justify-content-center align-items-center' style={{
               border: "1px solid yellow",
-              width: "40%",
+              padding: "10px",
+              backgroundColor: "rgb(30, 33, 58)"
             }}>
-              <p>Wind status</p>
-              <p>7mph</p>
-              <p><img></img>WSW</p>
+              <div style={{ fontSize: "12px" }}>Humidity</div>
+              <div className='container d-flex justify-content-center align-items-center gap-2'>
+                <div className={styles.num}>{dataWeather && dataWeather.main.humidity}</div><div>%</div>
+              </div>
+              <div className='container d-flex flex-column' style={{ width: "85%" }}>
+                <div className='d-flex justify-content-between'>
+                  <div style={{ fontSize: "10px" }}>0</div>
+                  <div style={{ fontSize: "10px" }}>50</div>
+                  <div style={{ fontSize: "10px" }}>100</div>
+                </div>
+                <div className="progress" role="progressbar" aria-label="Warning example" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style={{ width: "100%", height: "5px" }}>
+                  <div className="progress-bar bg-warning" style={{ width: `${dataWeather && dataWeather.main.humidity}%` }}></div>
+                </div>
+                <div className='d-flex justify-content-end' style={{ fontSize: "10px" }}>%</div>
+              </div>
+
             </div>
-            <div className='container d-flex flex-column justify-content-center align-items-center' style={{
+            {/* ----------------------------------------------Visibility------------------------------------------------------------ */}
+            <div className=' d-flex flex-column justify-content-center align-items-center' style={{
               border: "1px solid yellow",
-              width: "40%",
+              padding: "10px",
+              backgroundColor: "rgb(30, 33, 58)"
             }}>
-              <p>Wind status</p>
-              <p>7mph</p>
-              <p><img></img>WSW</p>
+              <div>Visibility</div>
+              <div className='container d-flex justify-content-center align-items-center gap-2'>
+                <div className={styles.num}>{((dataWeather && dataWeather.visibility) / 1000).toFixed(1)}</div><div>milles</div>
+              </div>
+
             </div>
-            <div className='container d-flex flex-column justify-content-center align-items-center' style={{
+            {/* ------------------------------------------Air Pressure------------------------------------------------------------- */}
+            <div className=' d-flex flex-column justify-content-center align-items-center' style={{
               border: "1px solid yellow",
-              width: "40%",
+              padding: "10px",
+              backgroundColor: "rgb(30, 33, 58)"
             }}>
-              <p>Wind status</p>
-              <p>7mph</p>
-              <p><img></img>WSW</p>
+              <div>Air Pressure</div>
+              <div className='container d-flex justify-content-center align-items-center gap-2'>
+                <div className={styles.num}>{dataWeather && dataWeather.main.pressure}</div><div>mb</div>
+              </div>
+
             </div>
           </div>
 
@@ -240,7 +263,7 @@ export default function Home() {
           border: "1px solid green",
           width: "80%",
         }}>
-          create by Alexxanderrx - devChallenges.io
+          <p>create by Alexxanderrx - devChallenges.io</p>
         </div>
       </div>
     </main >
