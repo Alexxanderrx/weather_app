@@ -93,7 +93,7 @@ export default function Home() {
       <nav className={[styles.boxNav, CLASSNEW].join(' ')}>
         {/* style={{ border: "1px solid white" }} */}
         <div className="container p-4 d-flex justify-content-end" >
-          <button type="button" className="btn-close" aria-label="Close" onClick={OpenUp}></button>
+          <button type="button" className="btn-close btn-close-white" aria-label="Close" onClick={OpenUp}></button>
           {/* <button type="button" className="btn btn-secondary" onClick={""}>X</button> */}
         </div>
         <div className="container d-flex flex-column  p-0 justify-content-start align-items-center" style={{
