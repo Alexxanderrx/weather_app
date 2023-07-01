@@ -211,6 +211,10 @@
     gap: 15px;
   }
 
+  .boxNav {
+    width: 30%;
+  }
+
   .grados>h1 {
     font-family: 'Raleway', sans-serif;
     font-size: 80px;

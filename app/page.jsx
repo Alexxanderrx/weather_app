@@ -5,18 +5,19 @@ import DayClima from '@/components/DayClima';
 
 // async
 export default function Home() {
-  const [dataRecup, setDataRecup] = useState(null);
+  const [dataRecup, setDataRecup] = useState([]);
   const [dataWeather, setDataWeather] = useState(null);
   const [dataFore, setDataFore] = useState(null);
 
-  let ciudad = "";
+  const [inputLoc, setInputLoc] = useState("");
+  const inputLocCambio = event => {
+    setInputLoc(event.target.value)
+  }
   useEffect(() => {
     async function getData() {
-      const response = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${ciudad == "" ? "lima" : ciudad}&limit=5&appid=b7b1b4492885348f44fdc6c0af7556ca`);
+      const response = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${inputLoc == "" ? "helsinki" : inputLoc}&limit=5&appid=b7b1b4492885348f44fdc6c0af7556ca`);
       const data = await response.json();
       setDataRecup(data);
-      // console.log("hola");
-      // console.log(data);
       const responseW = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${data[0].lat}&lon=${data[0].lon}&appid=b7b1b4492885348f44fdc6c0af7556ca`);
       const dataW = await responseW.json();
       setDataWeather(dataW);
@@ -27,11 +28,15 @@ export default function Home() {
     getData();
   }, []);
   console.log(dataRecup);
-  console.log(dataWeather);
-  console.log(dataFore);
-  // console.log((dataWeather && dataWeather.main.temp) - 273.15);
-  // console.log(typeof (dataWeather && dataWeather.main.temp));
 
+  let damian = []
+  for (let i = 0; i < dataRecup.length; i++) {
+    let jarol = (dataRecup[i].name.toLowerCase() + ", " + dataRecup[i].country);
+    damian.push(jarol)
+    console.log(damian)
+  };
+  // console.log(consoA);
+  console.log(inputLoc);
 
   const [open, setOpen] = useState(true);
   const OpenUp = () => {
@@ -79,6 +84,8 @@ export default function Home() {
   const diaCi = fechaCi.getDate();
   const mesCi = fechaCi.getMonth() + 1;
 
+
+
   return (
     <main className={styles.main}>
       {/* --------------------------------NavBar-------------------------------------------- */}
@@ -89,7 +96,7 @@ export default function Home() {
           <button type="button" className="btn-close" aria-label="Close" onClick={OpenUp}></button>
           {/* <button type="button" className="btn btn-secondary" onClick={""}>X</button> */}
         </div>
-        <div className="container d-flex p-0 justify-content-center align-items-start" style={{
+        <div className="container d-flex flex-column  p-0 justify-content-start align-items-center" style={{
           border: "1px solid white",
           width: "86%",
           height: "60%"
@@ -100,11 +107,17 @@ export default function Home() {
             gap: "10px"
           }}>
             <i className="bi bi-search" style={{ position: "absolute", color: "black", left: "10%" }}></i>
-            <input type="text" className="form-control" placeholder="search location" aria-label="First name" style={{ paddingLeft: "30px" }} />
-            <button type="button" className="btn btn-primary">Search</button>
+            <input type="text" className="form-control" placeholder="search location" aria-label="First name" style={{ paddingLeft: "30px" }} value={inputLoc} onChange={inputLocCambio} />
+            {/* onChange={buscar} */}
+            <button type="button" className="btn btn-primary" onClick={inputLocCambio}>Search</button>
           </div>
-
-
+          <div>
+            {
+              (damian.map((mostrar, a) => {
+                return <li key={a}> {mostrar} </li>
+              }))
+            }
+          </div>
         </div>
       </nav>
 
@@ -129,7 +142,6 @@ export default function Home() {
         }}>
           <div className={styles.grados}>
             <h1>{(((dataWeather && dataWeather.main.temp) - 273.15) * (VALUEM) + (VALUES)).toFixed(0)}</h1><span> °{simbol}</span>
-            {/* {console.log(dataWeather && dataWeather.main.temp)} */}
           </div>
           <h5>{(dataWeather && dataWeather.weather[0].main)}</h5>
           <h6>Today . {DAYS[todaySem]}, {today} {MONTHS[monthAct]}</h6>
@@ -217,10 +229,10 @@ export default function Home() {
             <div className=' d-flex flex-column justify-content-center align-items-center'>
               <div style={{ fontSize: "12px" }}>Wind status</div>
               <div className='container d-flex justify-content-center align-items-center gap-2'>
-                <div className={styles.num}>{dataWeather && dataWeather.wind.speed}</div><div>mph</div>
+                <div className={styles.num}>{((dataWeather && dataWeather.wind.speed) * 2.237).toFixed(1)}</div><div>mph</div>
               </div>
               <div className='container d-flex justify-content-center align-items-center gap-2 '>
-                <div style={{ transform: `rotate(${dataWeather && dataWeather.wind.deg}deg)`, height: "25px", width: "25px" }} className="badge rounded-circle text-bg-secondary d-flex justify-content-center align-items-center" ><i className="bi bi-forward-fill"></i></div>
+                <div style={{ transform: `rotate(${(dataWeather && dataWeather.wind.deg) - 90}deg)`, height: "25px", width: "25px" }} className="badge rounded-circle text-bg-secondary d-flex justify-content-center align-items-center" ><i className="bi bi-forward-fill"></i></div>
                 <div style={{ fontSize: "13px" }}>WSW</div>
               </div>
 
