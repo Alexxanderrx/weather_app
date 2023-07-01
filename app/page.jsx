@@ -31,7 +31,7 @@ export default function Home() {
 
   let damian = []
   for (let i = 0; i < dataRecup.length; i++) {
-    let jarol = (dataRecup[i].name.toLowerCase() + ", " + dataRecup[i].country);
+    let jarol = (dataRecup[i].name.toLowerCase() + ", " + dataRecup[i].state + ", " + dataRecup[i].country);
     damian.push(jarol)
     console.log(damian)
   };
@@ -97,19 +97,18 @@ export default function Home() {
           {/* <button type="button" className="btn btn-secondary" onClick={""}>X</button> */}
         </div>
         <div className="container d-flex flex-column  p-0 justify-content-start align-items-center" style={{
-          border: "1px solid white",
+          // border: "1px solid white",
           width: "86%",
           height: "60%"
         }}>
           <div className="container d-flex p-0 justify-content-center align-items-center" style={{
-            border: "1px solid red",
+            // border: "1px solid red",
             width: "100%",
-            gap: "10px"
+            gap: "8px"
           }}>
-            <i className="bi bi-search" style={{ position: "absolute", color: "black", left: "10%" }}></i>
-            <input type="text" className="form-control" placeholder="search location" aria-label="First name" style={{ paddingLeft: "30px" }} value={inputLoc} onChange={inputLocCambio} />
-            {/* onChange={buscar} */}
-            <button type="button" className="btn btn-primary" onClick={OpenUp}>Search</button>
+            <i className="bi bi-search" style={{ position: "absolute", color: "rgb(89, 91, 109)", left: "10%" }}></i>
+            <input type="text" className="form-control" placeholder="search location" aria-label="First name" style={{ paddingLeft: "30px", border: "1px solid white", backgroundColor: "transparent", color: "white", borderRadius: "0" }} value={inputLoc} onChange={inputLocCambio} />
+            <button type="button" className="btn btn-primary" style={{ border: "0", backgroundColor: "rgb(60, 71, 233)", borderRadius: "0" }} onClick={OpenUp}>Search</button>
           </div>
           <div className="container d-flex flex-column p-0 justify-content-center align-items-center">
             {
@@ -117,7 +116,7 @@ export default function Home() {
                 function muestraPe() {
                   setInputLoc(mostrar)
                 }
-                return <button key={a} className="d-flex p-2 m-1  w-100" style={{ backgroundColor: "transparent", color: "white", border: "1px solid rgb(89, 91, 109)" }} onClick={muestraPe}> {mostrar} </button>
+                return <button key={a} className={styles.btnMostrar} onClick={muestraPe}> {mostrar} <i class="bi bi-chevron-compact-right"></i></button>
               }))
             }
           </div>

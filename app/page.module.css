@@ -140,6 +140,24 @@
   background-color: rgb(30, 33, 58);
 }
 
+.btnMostrar {
+  /* "d-flex p-2 m-1  w-100" style={{ backgroundColor: "transparent", color: "white", border: "1px solid rgb(89, 91, 109)" }} */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 40px;
+  padding: 4%;
+  margin-top: 3%;
+  background-color: transparent;
+  color: white;
+  border: 0;
+}
+
+.btnMostrar:hover {
+  border: 1px solid rgb(89, 91, 109);
+}
+
 /* Mobile */
 @media (max-width: 700px) {
 
