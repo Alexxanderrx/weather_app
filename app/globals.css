@@ -28,3 +28,16 @@ body {
     overflow-y: scroll;
   }
 }
+
+/* Tablet and Smaller Desktop */
+@media (min-width: 701px) and (max-width: 1120px) {
+  body {
+    /* flex-direction: column; */
+    width: 100%;
+    height: 100%;
+    /* overflow-y: scroll; */
+  }
+}
+
+/* 4k Desktop */
+@media (min-width: 2160px) {}

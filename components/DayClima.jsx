@@ -2,14 +2,14 @@ import React from "react";
 import styles from '../components/DayClima.module.css'
 export default function DayClima(params) {
     return (
-        <days className='container m-0 d-flex flex-column justify-content-around align-items-center' style={{
+        <div className='container m-0 d-flex flex-column justify-content-around align-items-center' style={{
             border: "1px solid red",
-
-            // width: "18%",
+            backgroundColor: "rgb(30, 33, 58)"
         }}>
             <div className={styles.day}>{params.dayS} {params.thatDay} {params.month}</div>
             <img src={params.wheaterIMG} className={styles.imgWeaterT} alt='Weather.png' />
-            <div className='d-flex gap-2 ' style={{ fontSize: "13px" }}>
+            {/* className='d-flex gap-2 ' 13 */}
+            <div className={styles.dayTxt}>
                 <div className='d-flex'>
                     <div>{params.tempMAX}</div>
                     <div>°{params.simbol}</div>
@@ -19,6 +19,6 @@ export default function DayClima(params) {
                     <div>°{params.simbol}</div>
                 </div>
             </div>
-        </days>
+        </div>
     )
 }

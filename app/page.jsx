@@ -106,8 +106,8 @@ export default function Home() {
 
         </div>
       </nav>
-      {/* -------------------------------------------------------boxClimate----------------------------------------------------------- */}
 
+      {/* --------------------------------boxClimate-------------------------------------------- */}
       <section className={styles.boxClimate}>
         <div className="container p-4 d-flex justify-content-between" >
           <button type="button" className="btn btn-secondary" onClick={OpenUp}>Search for places</button>
@@ -135,7 +135,7 @@ export default function Home() {
           <h6><i className="bi bi-geo-alt-fill"></i> {(dataWeather && dataWeather.name)}</h6>
         </div>
       </section>
-      {/* -------------------------------------------------------boxToday----------------------------------------------------------- */}
+      {/* ----------------------------boxToday--------------------------------------------------- */}
       <div className={styles.boxToday}>
         {/* ------------------------------BUTTONS---------------------------------------------- */}
         <div className='container d-flex justify-content-end align-items-end' style={{
@@ -202,7 +202,7 @@ export default function Home() {
             simbol={simbol}
           />
         </div>
-        {/* ------------------------------Today's Hightlights---------------------------------------------- */}
+        {/* ------------------------------Today's Hightlights---------------------------------------- */}
         <div className='container p-0 d-flex flex-column justify-content-center align-items-center' style={{
           border: "1px solid green",
           width: "80%",
@@ -215,7 +215,7 @@ export default function Home() {
             <p className='fw-semibold' style={{ fontSize: "18px" }}>Today's Hightlights</p>
           </div>
           <div className={styles.todayHigh}>
-            {/* ---------------------------------------------Wind status--------------------------------------------------------- */}
+            {/* ------------------------------Wind status--------------------------------------- */}
             <div className=' d-flex flex-column justify-content-center align-items-center' style={{
               border: "1px solid yellow",
               padding: "10px",
@@ -232,7 +232,7 @@ export default function Home() {
               </div>
 
             </div>
-            {/* ----------------------------------------------Humidity------------------------------------------------------------- */}
+            {/* ------------------------------Humidity--------------------------------------------------- */}
             <div className=' d-flex flex-column justify-content-center align-items-center' style={{
               border: "1px solid yellow",
               padding: "10px",
@@ -255,7 +255,7 @@ export default function Home() {
               </div>
 
             </div>
-            {/* ----------------------------------------------Visibility------------------------------------------------------------ */}
+            {/* ----------------------Visibility------------------------------------ */}
             <div className=' d-flex flex-column justify-content-center align-items-center' style={{
               border: "1px solid yellow",
               padding: "10px",
@@ -267,7 +267,7 @@ export default function Home() {
               </div>
 
             </div>
-            {/* ------------------------------------------Air Pressure------------------------------------------------------------- */}
+            {/* -----------------------------Air Pressure------------------------------------- */}
             <div className=' d-flex flex-column justify-content-center align-items-center' style={{
               border: "1px solid yellow",
               padding: "10px",

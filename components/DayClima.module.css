@@ -5,3 +5,26 @@
 .day {
     font-size: 13px;
 }
+
+.dayTxt {
+    font-size: 13px;
+}
+
+/* Tablet and Smaller Desktop */
+@media (min-width: 701px) and (max-width: 1120px) {
+    .day {
+        font-size: 9px;
+    }
+
+    .imgWeaterT {
+        width: 40px;
+    }
+
+    .dayTxt {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 9px;
+    }
+}

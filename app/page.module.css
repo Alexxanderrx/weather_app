@@ -200,20 +200,31 @@
     width: 100%;
   }
 
-  .boxClimate {
-    height: 100%;
+  .daysBox {
+    gap: 15px;
   }
 
-  .boxNav {
-    width: 30%;
+  .grados>h1 {
+    font-family: 'Raleway', sans-serif;
+    font-size: 80px;
+  }
+
+  .grados>span {
+    font-family: 'Raleway', sans-serif;
+    font-size: 30px;
+    padding-top: 15px;
+  }
+
+  .boxClimate>div>button {
+    font-size: 12px;
   }
 
   .imgWeaterBC {
-    width: 130px;
+    width: 120px;
   }
 
   .bgCloudBC {
-    width: 400px;
+    width: 340px;
   }
 }
 
