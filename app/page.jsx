@@ -180,7 +180,6 @@ export default function Home() {
             tempMIN={(((dataFore && dataFore.list[19].main.temp_min) - 273.15) * (VALUEM) + (VALUES)).toFixed(0)}
             simbol={simbol}
           />
-          npm run build
           <DayClima
             dayS={DAYS[(todaySem + 4) > 6 ? (todaySem + 4) - 7 : (todaySem + 4)] + ","}
             thatDay={diaCu}
