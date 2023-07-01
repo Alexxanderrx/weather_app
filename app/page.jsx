@@ -18,16 +18,19 @@ export default function Home() {
       const response = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${inputLoc == "" ? "helsinki" : inputLoc}&limit=5&appid=b7b1b4492885348f44fdc6c0af7556ca`);
       const data = await response.json();
       setDataRecup(data);
-      const responseW = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${data[0].lat}&lon=${data[0].lon}&appid=b7b1b4492885348f44fdc6c0af7556ca`);
+      const responseW = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${(data[0].lat) == undefined ? "60.6072482" : (data[0].lat)}&lon=${(data[0].lon) == undefined ? "21.4450425" : (data[0].lon)}&appid=b7b1b4492885348f44fdc6c0af7556ca`);
       const dataW = await responseW.json();
       setDataWeather(dataW);
-      const responseF = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${data[0].lat}&lon=${data[0].lon}&appid=b7b1b4492885348f44fdc6c0af7556ca`);
+      const responseF = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${(data[0].lat) == undefined ? "60.6072482" : (data[0].lat)}&lon=${(data[0].lon) == undefined ? "21.4450425" : (data[0].lon)}&appid=b7b1b4492885348f44fdc6c0af7556ca`);
       const dataF = await responseF.json();
       setDataFore(dataF);
     }
     getData();
   }, [inputLoc]);
   console.log(dataRecup);
+  console.log(dataWeather);
+  console.log(dataFore);
+
 
   let damian = []
   for (let i = 0; i < dataRecup.length; i++) {
@@ -35,6 +38,8 @@ export default function Home() {
     damian.push(jarol)
     console.log(damian)
   };
+
+
   // console.log(consoA);
   console.log(inputLoc);
   // console.log(typeof (inputLoc));
@@ -116,7 +121,7 @@ export default function Home() {
                 function muestraPe() {
                   setInputLoc(mostrar)
                 }
-                return <button key={a} className={styles.btnMostrar} onClick={muestraPe}> {mostrar} <i class="bi bi-chevron-compact-right"></i></button>
+                return <button key={a} className={styles.btnMostrar} onClick={muestraPe}> {mostrar} <i className="bi bi-chevron-compact-right"></i></button>
               }))
             }
           </div>
