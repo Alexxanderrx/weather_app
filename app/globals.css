@@ -24,7 +24,7 @@ body {
   body {
     flex-direction: column;
     width: 100%;
-    height: 400vh;
+    height: 360vh;
     overflow-y: scroll;
   }
 }

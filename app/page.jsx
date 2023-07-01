@@ -1,11 +1,13 @@
 "use client"
 import { useEffect, useState } from 'react'
 import styles from './page.module.css'
+import DayClima from '@/components/DayClima';
 
 // async
 export default function Home() {
   const [dataRecup, setDataRecup] = useState(null);
   const [dataWeather, setDataWeather] = useState(null);
+  const [dataFore, setDataFore] = useState(null);
 
   let ciudad = "";
   useEffect(() => {
@@ -18,12 +20,16 @@ export default function Home() {
       const responseW = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${data[0].lat}&lon=${data[0].lon}&appid=b7b1b4492885348f44fdc6c0af7556ca`);
       const dataW = await responseW.json();
       setDataWeather(dataW);
+      const responseF = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${data[0].lat}&lon=${data[0].lon}&appid=b7b1b4492885348f44fdc6c0af7556ca`);
+      const dataF = await responseF.json();
+      setDataFore(dataF);
     }
     getData();
   }, []);
   console.log(dataRecup);
   console.log(dataWeather);
-  console.log((dataWeather && dataWeather.main.temp) - 273.15);
+  console.log(dataFore);
+  // console.log((dataWeather && dataWeather.main.temp) - 273.15);
   // console.log(typeof (dataWeather && dataWeather.main.temp));
 
 
@@ -42,8 +48,36 @@ export default function Home() {
   const CLASSNEW = open ? styles.compress : "";
   const VALUEM = kelvin ? 1.8 : 1;
   const VALUES = kelvin ? 32 : 0;
-  let simbol = kelvin ? "F" : "C"
+  let simbol = kelvin ? "F" : "C";
   // console.log(NEWVALUE);
+
+  const DAYS = ["Sun", "Mon", "Tue", "Wen", "Thu", "Fri", "Sat"];
+  const MONTHS = ["Mes_default_porque_lee_de_1a12", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+  const fecha = new Date();
+  const today = fecha.getDate();
+  const todaySem = fecha.getDay();
+  const monthAct = fecha.getMonth() + 1;
+
+  const fechaD = new Date();
+  fechaD.setDate(fechaD.getDate() + 2);
+  const diaD = fechaD.getDate();
+  const mesD = fechaD.getMonth() + 1;
+
+  const fechaT = new Date();
+  fechaT.setDate(fechaT.getDate() + 3);
+  const diaT = fechaT.getDate();
+  const mesT = fechaT.getMonth() + 1;
+
+  const fechaCu = new Date();
+  fechaCu.setDate(fechaCu.getDate() + 4);
+  const diaCu = fechaCu.getDate();
+  const mesCu = fechaCu.getMonth() + 1;
+
+  const fechaCi = new Date();
+  fechaCi.setDate(fechaCi.getDate() + 5);
+  const diaCi = fechaCi.getDate();
+  const mesCi = fechaCi.getMonth() + 1;
 
   return (
     <main className={styles.main}>
@@ -75,18 +109,15 @@ export default function Home() {
       {/* -------------------------------------------------------boxClimate----------------------------------------------------------- */}
 
       <section className={styles.boxClimate}>
-        {/* style={{ border: "1px solid white" }} */}
         <div className="container p-4 d-flex justify-content-between" >
           <button type="button" className="btn btn-secondary" onClick={OpenUp}>Search for places</button>
           <button type="button" className="btn btn-secondary rounded-circle">
             <i className="bi bi-geo-alt-fill"></i>
-            {/* <img src="./weatherResources/next.svg" className='img-fluid' alt='next' style={{ width: "10px" }} /> */}
           </button>
         </div>
         <div className="container d-flex justify-content-center align-items-center" style={{
           border: "1px solid blue",
           height: "35vh",
-          // overflow: "hidden",
         }}>
           <img src={`./weatherResources/${(dataWeather && dataWeather.weather[0].main)}.png`} className={styles.imgWeaterBC} alt='Weather.png' />
           <img src="./weatherResources/Cloud-background.png" className={styles.bgCloudBC} alt='Cloud-background.png' />
@@ -97,15 +128,16 @@ export default function Home() {
         }}>
           <div className={styles.grados}>
             <h1>{(((dataWeather && dataWeather.main.temp) - 273.15) * (VALUEM) + (VALUES)).toFixed(0)}</h1><span> °{simbol}</span>
-            {console.log(dataWeather && dataWeather.main.temp)}
+            {/* {console.log(dataWeather && dataWeather.main.temp)} */}
           </div>
           <h5>{(dataWeather && dataWeather.weather[0].main)}</h5>
-          <h6>Today - Fri, 5 Jun</h6>
+          <h6>Today . {DAYS[todaySem]}, {today} {MONTHS[monthAct]}</h6>
           <h6><i className="bi bi-geo-alt-fill"></i> {(dataWeather && dataWeather.name)}</h6>
         </div>
       </section>
       {/* -------------------------------------------------------boxToday----------------------------------------------------------- */}
       <div className={styles.boxToday}>
+        {/* ------------------------------BUTTONS---------------------------------------------- */}
         <div className='container d-flex justify-content-end align-items-end' style={{
           border: "1px solid green",
           width: "80%",
@@ -115,72 +147,62 @@ export default function Home() {
           <button type="button" className="btn btn-secondary rounded-circle" onClick={ConverToC}>°C</button>
           <button type="button" className="btn btn-secondary rounded-circle" onClick={ConverToF}>°F</button>
         </div>
-        <div className='container p-0 d-flex justify-content-between align-items-center ' style={{
+        {/* ------------------------------Days---------------------------------------------- */}
+        <div className={styles.daysBox} style={{
           border: "1px solid green",
-          width: "80%",
         }}>
 
-          <days className='container m-0 d-flex flex-column justify-content-center align-items-center' style={{
-            border: "1px solid red",
-            width: "18%",
-          }}>
-            <p>Tomorrow</p>
-            <img src='' alt='' />
-            <div>
-              <p>16<span>°C</span></p>
-              <p>11<span>°C</span></p>
-            </div>
-          </days>
+          <DayClima
+            dayS={"Tomorrow"}
+            thatDay={""}
+            month={""}
+            wheaterIMG={`./weatherResources/${(dataWeather && dataWeather.weather[0].main)}.png`}
+            tempMAX={(((dataFore && dataFore.list[6].main.temp_max) - 273.15) * (VALUEM) + (VALUES)).toFixed(0)}
+            tempMIN={(((dataFore && dataFore.list[3].main.temp_min) - 273.15) * (VALUEM) + (VALUES)).toFixed(0)}
+            simbol={simbol}
+          />
 
-          <days className='container m-0 d-flex flex-column justify-content-center align-items-center' style={{
-            border: "1px solid red",
-            width: "18%",
-          }}>
-            <p>Tomorrow</p>
-            <img src='' alt='' />
-            <div>
-              <p>16<span>°C</span></p>
-              <p>11<span>°C</span></p>
-            </div>
-          </days>
+          <DayClima
+            dayS={DAYS[(todaySem + 2) > 6 ? (todaySem + 2) - 7 : (todaySem + 2)] + ","}
+            thatDay={diaD}
+            month={MONTHS[mesD]}
+            wheaterIMG={`./weatherResources/${(dataWeather && dataWeather.weather[0].main)}.png`}
+            tempMAX={(((dataFore && dataFore.list[14].main.temp_max) - 273.15) * (VALUEM) + (VALUES)).toFixed(0)}
+            tempMIN={(((dataFore && dataFore.list[11].main.temp_min) - 273.15) * (VALUEM) + (VALUES)).toFixed(0)}
+            simbol={simbol}
+          />
 
-          <days className='container m-0 d-flex flex-column justify-content-center align-items-center' style={{
-            border: "1px solid red",
-            width: "18%",
-          }}>
-            <p>Tomorrow</p>
-            <img src='' alt='' />
-            <div>
-              <p>16<span>°C</span></p>
-              <p>11<span>°C</span></p>
-            </div>
-          </days>
+          <DayClima
+            dayS={DAYS[(todaySem + 3) > 6 ? (todaySem + 3) - 7 : (todaySem + 3)] + ","}
+            thatDay={diaT}
+            month={MONTHS[mesT]}
+            wheaterIMG={`./weatherResources/${(dataWeather && dataWeather.weather[0].main)}.png`}
+            tempMAX={(((dataFore && dataFore.list[22].main.temp_max) - 273.15) * (VALUEM) + (VALUES)).toFixed(0)}
+            tempMIN={(((dataFore && dataFore.list[19].main.temp_min) - 273.15) * (VALUEM) + (VALUES)).toFixed(0)}
+            simbol={simbol}
+          />
 
-          <days className='container m-0 d-flex flex-column justify-content-center align-items-center' style={{
-            border: "1px solid red",
-            width: "18%",
-          }}>
-            <p>Tomorrow</p>
-            <img src='' alt='' />
-            <div>
-              <p>16<span>°C</span></p>
-              <p>11<span>°C</span></p>
-            </div>
-          </days>
+          <DayClima
+            dayS={DAYS[(todaySem + 4) > 6 ? (todaySem + 4) - 7 : (todaySem + 4)] + ","}
+            thatDay={diaCu}
+            month={MONTHS[mesCu]}
+            wheaterIMG={`./weatherResources/${(dataWeather && dataWeather.weather[0].main)}.png`}
+            tempMAX={(((dataFore && dataFore.list[30].main.temp_max) - 273.15) * (VALUEM) + (VALUES)).toFixed(0)}
+            tempMIN={(((dataFore && dataFore.list[27].main.temp_min) - 273.15) * (VALUEM) + (VALUES)).toFixed(0)}
+            simbol={simbol}
+          />
 
-          <days className='container m-0 d-flex flex-column justify-content-center align-items-center' style={{
-            border: "1px solid red",
-            width: "18%",
-          }}>
-            <p>Tomorrow</p>
-            <img src='' alt='' />
-            <div>
-              <p>16<span>°C</span></p>
-              <p>11<span>°C</span></p>
-            </div>
-          </days>
-
+          <DayClima
+            dayS={DAYS[(todaySem + 5) > 6 ? (todaySem + 5) - 7 : (todaySem + 5)] + ","}
+            thatDay={diaCi}
+            month={MONTHS[mesCi]}
+            wheaterIMG={`./weatherResources/${(dataWeather && dataWeather.weather[0].main)}.png`}
+            tempMAX={(((dataFore && dataFore.list[38].main.temp_max) - 273.15) * (VALUEM) + (VALUES)).toFixed(0)}
+            tempMIN={(((dataFore && dataFore.list[35].main.temp_min) - 273.15) * (VALUEM) + (VALUES)).toFixed(0)}
+            simbol={simbol}
+          />
         </div>
+        {/* ------------------------------Today's Hightlights---------------------------------------------- */}
         <div className='container p-0 d-flex flex-column justify-content-center align-items-center' style={{
           border: "1px solid green",
           width: "80%",
@@ -189,6 +211,7 @@ export default function Home() {
             border: "1px solid red",
             width: "100%",
           }}>
+
             <p className='fw-semibold' style={{ fontSize: "18px" }}>Today's Hightlights</p>
           </div>
           <div className={styles.todayHigh}>
@@ -259,11 +282,11 @@ export default function Home() {
           </div>
 
         </div>
-        <div className='container d-flex justify-content-center align-items-center' style={{
+        <div className='container d-flex m-0 p-0 justify-content-center align-items-center' style={{
           border: "1px solid green",
           width: "80%",
         }}>
-          <p>create by Alexxanderrx - devChallenges.io</p>
+          <div className={styles.credits}>create by Alexxanderrx - devChallenges.io</div>
         </div>
       </div>
     </main >
