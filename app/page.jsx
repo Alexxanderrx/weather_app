@@ -81,6 +81,7 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
+      {/* --------------------------------NavBar-------------------------------------------- */}
       {/* , styles.compress */}
       <nav className={[styles.boxNav, CLASSNEW].join(' ')}>
         {/* style={{ border: "1px solid white" }} */}
@@ -116,14 +117,14 @@ export default function Home() {
           </button>
         </div>
         <div className="container d-flex justify-content-center align-items-center" style={{
-          border: "1px solid blue",
+          // border: "1px solid blue",
           height: "35vh",
         }}>
           <img src={`./weatherResources/${(dataWeather && dataWeather.weather[0].main)}.png`} className={styles.imgWeaterBC} alt='Weather.png' />
           <img src="./weatherResources/Cloud-background.png" className={styles.bgCloudBC} alt='Cloud-background.png' />
         </div>
         <div className='container d-flex flex-column justify-content-around align-items-center' style={{
-          border: "1px solid blue",
+          // border: "1px solid blue",
           height: "51%"
         }}>
           <div className={styles.grados}>
@@ -139,7 +140,7 @@ export default function Home() {
       <div className={styles.boxToday}>
         {/* ------------------------------BUTTONS---------------------------------------------- */}
         <div className='container d-flex justify-content-end align-items-end' style={{
-          border: "1px solid green",
+          // border: "1px solid green",
           width: "80%",
           padding: "0",
           gap: "15px"
@@ -149,14 +150,12 @@ export default function Home() {
         </div>
         {/* ------------------------------Days---------------------------------------------- */}
         <div className={styles.daysBox} style={{
-          border: "1px solid green",
+          // border: "1px solid green",
         }}>
 
           <DayClima
             dayS={"Tomorrow"}
-            thatDay={""}
-            month={""}
-            wheaterIMG={`./weatherResources/${(dataWeather && dataWeather.weather[0].main)}.png`}
+            wheaterIMG={`./weatherResources/${(dataFore && dataFore.list[6].weather[0].main)}.png`}
             tempMAX={(((dataFore && dataFore.list[6].main.temp_max) - 273.15) * (VALUEM) + (VALUES)).toFixed(0)}
             tempMIN={(((dataFore && dataFore.list[3].main.temp_min) - 273.15) * (VALUEM) + (VALUES)).toFixed(0)}
             simbol={simbol}
@@ -166,7 +165,7 @@ export default function Home() {
             dayS={DAYS[(todaySem + 2) > 6 ? (todaySem + 2) - 7 : (todaySem + 2)] + ","}
             thatDay={diaD}
             month={MONTHS[mesD]}
-            wheaterIMG={`./weatherResources/${(dataWeather && dataWeather.weather[0].main)}.png`}
+            wheaterIMG={`./weatherResources/${(dataFore && dataFore.list[14].weather[0].main)}.png`}
             tempMAX={(((dataFore && dataFore.list[14].main.temp_max) - 273.15) * (VALUEM) + (VALUES)).toFixed(0)}
             tempMIN={(((dataFore && dataFore.list[11].main.temp_min) - 273.15) * (VALUEM) + (VALUES)).toFixed(0)}
             simbol={simbol}
@@ -176,7 +175,7 @@ export default function Home() {
             dayS={DAYS[(todaySem + 3) > 6 ? (todaySem + 3) - 7 : (todaySem + 3)] + ","}
             thatDay={diaT}
             month={MONTHS[mesT]}
-            wheaterIMG={`./weatherResources/${(dataWeather && dataWeather.weather[0].main)}.png`}
+            wheaterIMG={`./weatherResources/${(dataFore && dataFore.list[22].weather[0].main)}.png`}
             tempMAX={(((dataFore && dataFore.list[22].main.temp_max) - 273.15) * (VALUEM) + (VALUES)).toFixed(0)}
             tempMIN={(((dataFore && dataFore.list[19].main.temp_min) - 273.15) * (VALUEM) + (VALUES)).toFixed(0)}
             simbol={simbol}
@@ -186,7 +185,7 @@ export default function Home() {
             dayS={DAYS[(todaySem + 4) > 6 ? (todaySem + 4) - 7 : (todaySem + 4)] + ","}
             thatDay={diaCu}
             month={MONTHS[mesCu]}
-            wheaterIMG={`./weatherResources/${(dataWeather && dataWeather.weather[0].main)}.png`}
+            wheaterIMG={`./weatherResources/${(dataFore && dataFore.list[30].weather[0].main)}.png`}
             tempMAX={(((dataFore && dataFore.list[30].main.temp_max) - 273.15) * (VALUEM) + (VALUES)).toFixed(0)}
             tempMIN={(((dataFore && dataFore.list[27].main.temp_min) - 273.15) * (VALUEM) + (VALUES)).toFixed(0)}
             simbol={simbol}
@@ -196,7 +195,7 @@ export default function Home() {
             dayS={DAYS[(todaySem + 5) > 6 ? (todaySem + 5) - 7 : (todaySem + 5)] + ","}
             thatDay={diaCi}
             month={MONTHS[mesCi]}
-            wheaterIMG={`./weatherResources/${(dataWeather && dataWeather.weather[0].main)}.png`}
+            wheaterIMG={`./weatherResources/${(dataFore && dataFore.list[38].weather[0].main)}.png`}
             tempMAX={(((dataFore && dataFore.list[38].main.temp_max) - 273.15) * (VALUEM) + (VALUES)).toFixed(0)}
             tempMIN={(((dataFore && dataFore.list[35].main.temp_min) - 273.15) * (VALUEM) + (VALUES)).toFixed(0)}
             simbol={simbol}
@@ -204,11 +203,11 @@ export default function Home() {
         </div>
         {/* ------------------------------Today's Hightlights---------------------------------------- */}
         <div className='container p-0 d-flex flex-column justify-content-center align-items-center' style={{
-          border: "1px solid green",
+          // border: "1px solid green",
           width: "80%",
         }}>
           <div className='container d-flex flex-column justify-content-center align-items-start' style={{
-            border: "1px solid red",
+            // border: "1px solid red",
             width: "100%",
           }}>
 
@@ -216,12 +215,7 @@ export default function Home() {
           </div>
           <div className={styles.todayHigh}>
             {/* ------------------------------Wind status--------------------------------------- */}
-            <div className=' d-flex flex-column justify-content-center align-items-center' style={{
-              border: "1px solid yellow",
-              padding: "10px",
-              fontFamily: "'Raleway', sans-serif",
-              backgroundColor: "rgb(30, 33, 58)"
-            }}>
+            <div className=' d-flex flex-column justify-content-center align-items-center'>
               <div style={{ fontSize: "12px" }}>Wind status</div>
               <div className='container d-flex justify-content-center align-items-center gap-2'>
                 <div className={styles.num}>{dataWeather && dataWeather.wind.speed}</div><div>mph</div>
@@ -233,11 +227,7 @@ export default function Home() {
 
             </div>
             {/* ------------------------------Humidity--------------------------------------------------- */}
-            <div className=' d-flex flex-column justify-content-center align-items-center' style={{
-              border: "1px solid yellow",
-              padding: "10px",
-              backgroundColor: "rgb(30, 33, 58)"
-            }}>
+            <div className=' d-flex flex-column justify-content-center align-items-center'>
               <div style={{ fontSize: "12px" }}>Humidity</div>
               <div className='container d-flex justify-content-center align-items-center gap-2'>
                 <div className={styles.num}>{dataWeather && dataWeather.main.humidity}</div><div>%</div>
@@ -256,11 +246,7 @@ export default function Home() {
 
             </div>
             {/* ----------------------Visibility------------------------------------ */}
-            <div className=' d-flex flex-column justify-content-center align-items-center' style={{
-              border: "1px solid yellow",
-              padding: "10px",
-              backgroundColor: "rgb(30, 33, 58)"
-            }}>
+            <div className=' d-flex flex-column justify-content-center align-items-center'>
               <div>Visibility</div>
               <div className='container d-flex justify-content-center align-items-center gap-2'>
                 <div className={styles.num}>{((dataWeather && dataWeather.visibility) / 1000).toFixed(1)}</div><div>milles</div>
@@ -268,11 +254,7 @@ export default function Home() {
 
             </div>
             {/* -----------------------------Air Pressure------------------------------------- */}
-            <div className=' d-flex flex-column justify-content-center align-items-center' style={{
-              border: "1px solid yellow",
-              padding: "10px",
-              backgroundColor: "rgb(30, 33, 58)"
-            }}>
+            <div className=' d-flex flex-column justify-content-center align-items-center'>
               <div>Air Pressure</div>
               <div className='container d-flex justify-content-center align-items-center gap-2'>
                 <div className={styles.num}>{dataWeather && dataWeather.main.pressure}</div><div>mb</div>
@@ -283,7 +265,7 @@ export default function Home() {
 
         </div>
         <div className='container d-flex m-0 p-0 justify-content-center align-items-center' style={{
-          border: "1px solid green",
+          // border: "1px solid green",
           width: "80%",
         }}>
           <div className={styles.credits}>create by Alexxanderrx - devChallenges.io</div>

@@ -3,7 +3,7 @@ import styles from '../components/DayClima.module.css'
 export default function DayClima(params) {
     return (
         <div className='container m-0 d-flex flex-column justify-content-around align-items-center' style={{
-            border: "1px solid red",
+            // border: "1px solid red",
             backgroundColor: "rgb(30, 33, 58)"
         }}>
             <div className={styles.day}>{params.dayS} {params.thatDay} {params.month}</div>
