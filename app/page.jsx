@@ -26,7 +26,7 @@ export default function Home() {
       setDataFore(dataF);
     }
     getData();
-  }, []);
+  }, [inputLoc]);
   console.log(dataRecup);
 
   let damian = []
@@ -37,6 +37,7 @@ export default function Home() {
   };
   // console.log(consoA);
   console.log(inputLoc);
+  // console.log(typeof (inputLoc));
 
   const [open, setOpen] = useState(true);
   const OpenUp = () => {
@@ -85,7 +86,6 @@ export default function Home() {
   const mesCi = fechaCi.getMonth() + 1;
 
 
-
   return (
     <main className={styles.main}>
       {/* --------------------------------NavBar-------------------------------------------- */}
@@ -109,12 +109,15 @@ export default function Home() {
             <i className="bi bi-search" style={{ position: "absolute", color: "black", left: "10%" }}></i>
             <input type="text" className="form-control" placeholder="search location" aria-label="First name" style={{ paddingLeft: "30px" }} value={inputLoc} onChange={inputLocCambio} />
             {/* onChange={buscar} */}
-            <button type="button" className="btn btn-primary" onClick={inputLocCambio}>Search</button>
+            <button type="button" className="btn btn-primary" onClick={OpenUp}>Search</button>
           </div>
-          <div>
+          <div className="container d-flex flex-column p-0 justify-content-center align-items-center">
             {
               (damian.map((mostrar, a) => {
-                return <li key={a}> {mostrar} </li>
+                function muestraPe() {
+                  setInputLoc(mostrar)
+                }
+                return <button key={a} className="d-flex p-2 m-1  w-100" style={{ backgroundColor: "transparent", color: "white", border: "1px solid rgb(89, 91, 109)" }} onClick={muestraPe}> {mostrar} </button>
               }))
             }
           </div>
