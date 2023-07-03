@@ -229,7 +229,7 @@ export default function Home() {
             width: "100%",
           }}>
 
-            <p className='fw-semibold' style={{ fontSize: "18px" }}>Today's Hightlights</p>
+            <p className='fw-semibold' style={{ fontSize: "18px" }}>Today&apos;s Hightlights</p>
           </div>
           <div className={styles.todayHigh}>
             {/* ------------------------------Wind status--------------------------------------- */}
