@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react'
 import styles from './page.module.css'
 import DayClima from '@/components/DayClima';
+import GoogleMaps from '@/components/GoogleMaps/GoogleMaps';
 
 // async
 export default function Home() {
@@ -36,12 +37,12 @@ export default function Home() {
   for (let i = 0; i < dataRecup.length; i++) {
     let jarol = (dataRecup[i].name.toLowerCase() + ", " + dataRecup[i].state + ", " + dataRecup[i].country);
     damian.push(jarol)
-    console.log(damian)
+    // console.log(damian)
   };
 
+  console.log(inputLoc);
 
   // console.log(consoA);
-  console.log(inputLoc);
   // console.log(typeof (inputLoc));
 
   const [open, setOpen] = useState(true);
@@ -99,7 +100,6 @@ export default function Home() {
         {/* style={{ border: "1px solid white" }} */}
         <div className="container p-4 d-flex justify-content-end" >
           <button type="button" className="btn-close btn-close-white" aria-label="Close" onClick={OpenUp}></button>
-          {/* <button type="button" className="btn btn-secondary" onClick={""}>X</button> */}
         </div>
         <div className="container d-flex flex-column  p-0 justify-content-start align-items-center" style={{
           // border: "1px solid white",
@@ -132,9 +132,10 @@ export default function Home() {
       <section className={styles.boxClimate}>
         <div className="container p-4 d-flex justify-content-between" >
           <button type="button" className="btn btn-secondary" onClick={OpenUp}>Search for places</button>
-          <button type="button" className="btn btn-secondary rounded-circle">
+          <GoogleMaps />
+          {/* <button type="button" className="btn btn-secondary rounded-circle">
             <i className="bi bi-geo-alt-fill"></i>
-          </button>
+          </button> */}
         </div>
         <div className="container d-flex justify-content-center align-items-center" style={{
           // border: "1px solid blue",

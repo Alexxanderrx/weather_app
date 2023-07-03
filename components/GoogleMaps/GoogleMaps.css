@@ -1,0 +1,27 @@
+.map-container {
+    top: 13%;
+    position: absolute;
+    width: 20%;
+    height: 83vh;
+    z-index: 3;
+    border-radius: 10px;
+    border: 1px solid rgb(16, 14, 29);
+}
+
+.close {
+    display: none;
+}
+
+@media (max-width: 700px) {
+    .map-container {
+        width: 85%;
+        height: 85vh;
+    }
+
+}
+
+@media (min-width: 701px) and (max-width: 1120px) {
+    .map-container {
+        width: 23%;
+    }
+}
