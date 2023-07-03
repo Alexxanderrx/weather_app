@@ -1,5 +1,5 @@
 import React from "react";
-import styles from '../components/DayClima.module.css'
+import styles from "../DayClima/DayClima.module.css"
 export default function DayClima(params) {
     return (
         <div className='container m-0 d-flex flex-column justify-content-around align-items-center' style={{

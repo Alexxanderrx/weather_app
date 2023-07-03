@@ -1,7 +1,7 @@
 "use client"
 import { useEffect, useState } from 'react'
 import styles from './page.module.css'
-import DayClima from '@/components/DayClima';
+import DayClima from '@/components/DayClima/DayClima';
 import GoogleMaps from '@/components/GoogleMaps/GoogleMaps';
 
 // async
