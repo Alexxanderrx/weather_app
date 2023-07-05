@@ -33,11 +33,11 @@ export default function Home() {
   console.log(dataFore);
 
 
-  let damian = []
+  let selector = []
   for (let i = 0; i < dataRecup.length; i++) {
-    let jarol = (dataRecup[i].name.toLowerCase() + ", " + dataRecup[i].state + ", " + dataRecup[i].country);
-    damian.push(jarol)
-    // console.log(damian)
+    let dataSelect = (dataRecup[i].name.toLowerCase() + ", " + ((dataRecup[i].state) == undefined ? " " : (dataRecup[i].state + ", ")) + dataRecup[i].country);
+    selector.push(dataSelect)
+    // console.log(selector)
   };
 
   console.log(inputLoc);
@@ -117,7 +117,7 @@ export default function Home() {
           </div>
           <div className="container d-flex flex-column p-0 justify-content-center align-items-center">
             {
-              (damian.map((mostrar, a) => {
+              (selector.map((mostrar, a) => {
                 function muestraPe() {
                   setInputLoc(mostrar)
                 }
