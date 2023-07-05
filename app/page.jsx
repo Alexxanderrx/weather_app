@@ -16,13 +16,13 @@ export default function Home() {
   }
   useEffect(() => {
     async function getData() {
-      const response = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${inputLoc == "" ? "helsinki" : inputLoc}&limit=5&appid=b7b1b4492885348f44fdc6c0af7556ca`);
+      const response = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${inputLoc == "" ? "helsinki" : inputLoc}&limit=5&appid=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}`);
       const data = await response.json();
       setDataRecup(data);
-      const responseW = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${(data[0].lat) == undefined ? "60.6072482" : (data[0].lat)}&lon=${(data[0].lon) == undefined ? "21.4450425" : (data[0].lon)}&appid=b7b1b4492885348f44fdc6c0af7556ca`);
+      const responseW = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${(data[0].lat) == undefined ? "60.6072482" : (data[0].lat)}&lon=${(data[0].lon) == undefined ? "21.4450425" : (data[0].lon)}&appid=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}`);
       const dataW = await responseW.json();
       setDataWeather(dataW);
-      const responseF = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${(data[0].lat) == undefined ? "60.6072482" : (data[0].lat)}&lon=${(data[0].lon) == undefined ? "21.4450425" : (data[0].lon)}&appid=b7b1b4492885348f44fdc6c0af7556ca`);
+      const responseF = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${(data[0].lat) == undefined ? "60.6072482" : (data[0].lat)}&lon=${(data[0].lon) == undefined ? "21.4450425" : (data[0].lon)}&appid=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}`);
       const dataF = await responseF.json();
       setDataFore(dataF);
     }
